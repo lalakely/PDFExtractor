@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extract and Fill PDF Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Uploader un PDF</h2>
+        <p class="subtitle">Sélectionnez votre formulaire PDF à traiter</p>
+      </div>
+      <div class="card-body">
+        <div class="drop-zone" id="dropZone" role="region" aria-label="Zone de dépôt de fichiers PDF">
+          <div class="drop-zone-content">
+            <i class="fas fa-file-pdf"></i>
+            <p class="drop-zone-text">Glissez et déposez le pdf de construction ici</p>
+            <p class="drop-zone-hint">ou cliquez pour sélectionner un fichier</p>
+          </div>
+          
+          <div class="pdf-preview-container">
+            <canvas id="pdfThumbnail" class="pdf-thumbnail"></canvas>
+            <p id="pdfFilename" class="pdf-filename"></p>
+          </div>
+          
+          <div class="remove-pdf" id="removePdf">
+            <i class="fas fa-trash"></i>
+          </div>
+        </div>
+        <input type="file" id="fileInput" accept="application/pdf" style="display: none;" />
+        
+        <div id="loadingIndicator" role="status" aria-live="polite">
+          <div class="loading-spinner"></div>
+          <span>Traitement en cours...</span>
+        </div>
+        
+        <button id="extractBtn" class="btn btn-extract" disabled aria-label="Extraire les données du PDF">
+          <i class="fas fa-search"></i>
+          Extraire les données
+        </button>
+        
+        <div id="output"></div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h2>Rendu du formulaire</h2>
+        <p class="subtitle">Aperçu du document PDF</p>
+      </div>
+      <div class="card-body">
+        <button id="translateBtn" class="btn btn-translate" disabled>
+          <i class="fas fa-file-pdf"></i>
+          Traduire le PDF en formulaire
+        </button>
+        
+        <iframe id="pdfPreview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include required scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.0/dist/pdf-lib.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.21.0/dist/pdf-lib.min.js"></script>
+
+  <!-- Import your existing scripts -->
+  <script src="../backend/extractPDF.js"></script>
+  <script src="../backend/translatePDF.js"></script>
+  <script src="./script/script.js"></script>
+</body>
+</html>
